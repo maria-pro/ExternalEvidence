@@ -1,7 +1,7 @@
 ---
 title: "External evidence"
 author: "Maria Prokofieva"
-date: "13/08/2020"
+date: "01/08/2020"
 output: html_document
 ---
 
@@ -32,8 +32,34 @@ The **objectives** of the project are:
 #### Deliverables
 
 
-
 ### Data collection
+
+#### Data sources stated in the proposal
+
+The project outline includes references to the following data sources:
+
+- Australian open government data (http://data.gov.au) 
+
+- Social media (e.g. Twitter API https://developer.twitter.com)
+
+- News API (https://newsapi.org/).
+
+The particular products used for current stage of data collection:
+
+- Twitter:
+--    Company tweets
+--   Tweets mentioning a company via #
+
+
+The proposed dashboard employs the developed model but collect information in realtime to ensure relevance of the data. This poses limitations to the social media data and news.
+
+#Limitations:
+Twitter allows data collection of up to last 10,000 tweets and this allowance is subject to changes on their side.
+
+
+
+
+
 
 The study is based on 
 
