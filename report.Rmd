@@ -1,0 +1,27 @@
+---
+title: "External evidence"
+author: "Maria Prokofieva"
+date: "13/08/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## External evidence for audit analytics
+
+#### Objectives
+
+#### Deliverables
+
+
+
+### Data collection
+
+The study is based on 
+
+### Variable and measurement
+
+### Methodology
+
