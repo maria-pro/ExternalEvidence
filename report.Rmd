@@ -13,6 +13,22 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Objectives
 
+The **objectives** of the project are: 
+
+- to examine the use of data analytics in collecting, evaluating and using audit evidence from external sources and 
+
+- to develop guidance on knowledge and skills required for audit profession to use audit analytics.
+
+#### Research questions
+
+**Key research questions** to address the objectives are:
+
+1. In what main ways can data analytics be used in the collection of audit evidence from external sources?
+
+2. How can data analytics be used to ensure quality and verifiability of audit evidence from external sources?
+
+3. What knowledge and skills are required for auditing professionals to successfully utilize data analytics?
+
 #### Deliverables
 
 
