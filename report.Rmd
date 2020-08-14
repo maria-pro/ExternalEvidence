@@ -57,13 +57,41 @@ The proposed dashboard employs the developed model but collect information in re
 Twitter allows data collection of up to last 10,000 tweets and this allowance is subject to changes on their side.
 
 
-
-
-
-
 The study is based on 
 
 ### Variable and measurement
 
 ### Methodology
 
+
+#### Data collection
+
+Sources and methods:
+
+- [News API](https://newsapi.org/)
+
+Data collection is automated using [News API](https://newsapi.org/). It is based on using the JSON and returns JSON metadata for headlines and articles live all over the web right now.
+
+The API can generally be used for free for non-commercial use cases. However, some restrictions are in place: you cannot download more than 1.000 results. Upgrade is available  https://newsapi.org/pricing for commercial options. The list of available sources is available in the Appendix.
+
+- [Google News](https://news.google.com/)
+
+[Google News](https://news.google.com/) is a news aggregator service developed by Google. It presents a continuous flow of articles organized from thousands of publishers and magazines. 
+The data was mined using R package `rvest`
+
+- **Thomson Reuters News**
+
+**Thomson Reuters News** is part of the university subscription to THomson Reuters. The data was collected manually using TR terminal
+
+
+
+-----------
+## Appendix
+
+List of avalable sources for News API:
+
+```{r}
+
+knitr::kable(newsanchor::terms_sources)
+
+```

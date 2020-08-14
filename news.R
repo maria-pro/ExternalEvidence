@@ -2,6 +2,26 @@
 library(rvest)
 library(tidyverse)
 
+devtools::install_github("correlaid/newsanchor")
+library(newsanchor)
+
+devtools::install_github("r-lib/usethis")
+library(usethis)
+
+newsApi_key = "148eb03f26c54c8a924c1917891582dc"
+
+results <- get_headlines(sources = "the-washington-post", api_key = newsApi_key)
+results_full <- get_everything_all(query = "Abacus Property", api_key = newsApi_key, language="en")
+
+
+newsanchor::terms_language
+APINewsSources<-newsanchor::terms_sources
+terms_country
+terms_category
+
+# save the api_key in the .Renviron file
+set_api_key(api_key = "148eb03f26c54c8a924c1917891582dc", 
+            path = "~/.Renviron")
 
 news <- function(term) {
   
