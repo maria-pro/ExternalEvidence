@@ -108,8 +108,8 @@ The data was mined using R package `rvest`
 List of avalable sources for News API:
 
 ```{r}
-sources<-readr::read_csv("data/newsAPIsources.csv")
+sources<-readr::read_csv("data/APINewsSources.csv")
 knitr::kable(sources[1:10,], col.names = "Sources", align="l", caption="Sample of Sources used under News API")
 ```
 
-The full list is available [here]()
+The full list is available [here](https://raw.githubusercontent.com/maria-pro/ExternalEvidence/master/data/newsAPIsources.csv)

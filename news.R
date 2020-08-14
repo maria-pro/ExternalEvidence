@@ -14,10 +14,16 @@ results <- get_headlines(sources = "the-washington-post", api_key = newsApi_key)
 results_full <- get_everything_all(query = "Abacus Property", api_key = newsApi_key, language="en")
 
 
-newsanchor::terms_language
-APINewsSources<-newsanchor::terms_sources
-terms_country
-terms_category
+write_csv(newsanchor::terms_language, "data/APINewsLanguage.csv")
+write_csv(newsanchor::terms_sources, "data/APINewsSources.csv")
+write_csv(newsanchor::terms_country, "data/APINewsCountry.csv")
+write_csv(newsanchor::terms_category, "data/APINewsCategory.csv")
+
+
+
+
+APINewsCountry<-newsanchor::terms_country
+APINewsCategory<-newsanchor::terms_category
 
 # save the api_key in the .Renviron file
 set_api_key(api_key = "148eb03f26c54c8a924c1917891582dc", 
