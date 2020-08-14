@@ -6,7 +6,14 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE,   
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.height = 4,
+                      fig.width = 8,
+                      fig.align = "center")
+
+library(tidyverse, knitr)
 ```
 
 ## External evidence for audit analytics
@@ -66,6 +73,16 @@ The study is based on
 
 #### Data collection
 
+##### Companies:
+
+The sample includes 213 companies listed at ASX. The selection was done by tracing All-Ordinary S&P/ASX index over 10 years to isolate companies who remained in the index throughout the period. 
+
+**Rationale**: ensure consistency in data as well as representativeness of the sample. Also, it was assumed that such "stable" companies have visibility and will be presented in external data sources.
+
+The list of companies is available [here](https://raw.githubusercontent.com/maria-pro/ExternalEvidence/master/data/listOfCompanies.csv). The file includes company names as well as identification numbers across a number of systems to allow access to company informaiton cross-platform-wise.
+
+
+
 Sources and methods:
 
 - [News API](https://newsapi.org/)
@@ -91,7 +108,8 @@ The data was mined using R package `rvest`
 List of avalable sources for News API:
 
 ```{r}
-
-knitr::kable(newsanchor::terms_sources)
-
+sources<-readr::read_csv("data/newsAPIsources.csv")
+knitr::kable(sources[1:10,], col.names = "Sources", align="l", caption="Sample of Sources used under News API")
 ```
+
+The full list is available [here]()
