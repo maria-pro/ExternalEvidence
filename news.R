@@ -10,10 +10,36 @@ library(usethis)
 
 newsApi_key = "148eb03f26c54c8a924c1917891582dc"
 
+
+
+#loading the file with company names
+
+companies<-read_csv("data/listOfCompanies.csv")
+
 results <- get_headlines(sources = "the-washington-post", api_key = newsApi_key)
 results_full <- get_everything_all(query = "Abacus Property", api_key = newsApi_key, language="en")
 
+test<-results_full %>%
+  unnest(c(metadata, results_df))
 
+
+
+
+
+test<-results_full$results_df%>%unnest()
+
+
+
+
+
+
+
+test_metadata<-results_full$metadata%>%
+  unnest() %>%
+  mutate(company="Abacus group")
+
+
+#search options
 write_csv(newsanchor::terms_language, "data/APINewsLanguage.csv")
 write_csv(newsanchor::terms_sources, "data/APINewsSources.csv")
 write_csv(newsanchor::terms_country, "data/APINewsCountry.csv")
