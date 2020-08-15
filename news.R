@@ -1,4 +1,7 @@
 
+op,tions(stringsAsFactors = FALSE)
+
+
 library(rvest)
 library(tidyverse)
 
@@ -11,22 +14,40 @@ library(usethis)
 newsApi_key = "148eb03f26c54c8a924c1917891582dc"
 
 
-
 #loading the file with company names
-
 companies<-read_csv("data/listOfCompanies.csv")
+searchTerms<-companies$searchTerm
+
+testCompanies<-c("ANZ", "Google", "Amazon")
+
+
+dataFrame = list()
+for (i in testCompanies){
+  #print(i)
+  
+  results_full <- get_everything_all(query = i, api_key = newsApi_key, language="en")
+  
+  #cont <- content(pages[[u]], as = "parsed", type = "application/json")
+  #explicit convertion to data frame
+  #dataFrame[[u]] <- data.frame(cont)
+  
+  
+}
+
+test<-results_full$results_df%>%
+  unnest()%>%
+  mutate(companyName=i)
+
 
 results <- get_headlines(sources = "the-washington-post", api_key = newsApi_key)
 results_full <- get_everything_all(query = "Abacus Property", api_key = newsApi_key, language="en")
 
-test<-results_full %>%
-  unnest(c(metadata, results_df))
 
 
 
 
 
-test<-results_full$results_df%>%unnest()
+
 
 
 
