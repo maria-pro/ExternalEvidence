@@ -22,6 +22,18 @@ testCompanies<-c("ANZ", "Google", "Amazon")
 
 
 dataFrame = list()
+#data<-tibble(x=testCompanies[1])
+
+names<-colnames(test)
+data<-tibble()
+colnames(data)<-colnames(test)
+
+
+data<-data %>% add_row(colnames(test)=test[2,])
+
+
+
+
 for (i in testCompanies){
   #print(i)
   
@@ -30,10 +42,11 @@ for (i in testCompanies){
   #cont <- content(pages[[u]], as = "parsed", type = "application/json")
   #explicit convertion to data frame
   #dataFrame[[u]] <- data.frame(cont)
+  add_row(data, i)
   
   
 }
-
+#to record results in a dataset and save to disk
 test<-results_full$results_df%>%
   unnest()%>%
   mutate(companyName=i)
