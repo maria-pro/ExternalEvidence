@@ -18,6 +18,61 @@ library(tidyverse, knitr)
 
 ## External evidence for audit analytics
 
+The project looks into using external evidence from social media as external evidence for audit.
+
+Social media has shown to be a valuable source of information, both from internal (i.e. the company) and external (i.e. users).
+
+The project also looks at news, such as business press to external evidence about the company's position and performance.
+
+The difficulty of using social media as external evidence comes from limitations of a generalizable approach that can be applied to a range of companies. Understanding possible generalization of the framework would allow reduction in time and effort of external audit.
+
+
+--- Deniz' paper on audit analytics -----
+
+Insights from **news**:
+
+- while some companies do not have a social media account and are not tweeted about in social media, they still appear in news. 
+
+- News are used to identify key terms for the company and the industry in general.
+
+- 
+
+The insights from the **social media** include:
+
+- hashtag analysis to understand the list of hashtags associated with the company
+
+- wordclouds and word analysis of tweets to understand "key words" associated with a particular company, range of companies or the industry. Developing a "dictionary" of such keywords is essential for developing a generalizable approach.
+
+- sentiment analysis of tweets to ascertain mood and perception of the external users about the company
+
+- topic modeling of tweets from external users to leverage the perception of the public vs managing expectations (from the side of a company)
+
+### Model
+
+The diagram below presents the broad model for the project that integrates 
+
+- news  (external data)
+
+- social media (external AND internal data)
+
+- financial performance indicators (internal data)
+
+- company announcements (internal data)
+
+
+
+
+
+**Limitation**:
+
+- The developed model is based on a limited set of data from ASX companies which is a smaller stock exchange. 
+
+- It is also distorted by the recent COVID-19 events.
+
+- The data around initial search terms and search hashtags are collected manually. Though it was cross-checked, omissions and genuin errors are possible.
+
+Companies may have 
+
 #### Objectives
 
 The **objectives** of the project are: 
@@ -38,6 +93,7 @@ The **objectives** of the project are:
 
 #### Deliverables
 
+- a dashboard that allows live generation of current and recent tweets as well as analysis of tweet related information.
 
 ### Data collection
 
@@ -55,7 +111,7 @@ The particular products used for current stage of data collection:
 
 - Twitter:
 --    Company tweets
---   Tweets mentioning a company via #
+--   Tweets mentioning a company via # hashtag
 
 
 The proposed dashboard employs the developed model but collect information in realtime to ensure relevance of the data. This poses limitations to the social media data and news.
@@ -105,7 +161,7 @@ The data was mined using R package `rvest`
 -----------
 ## Appendix
 
-List of avalable sources for News API:
+List of available sources for News API:
 
 ```{r}
 sources<-readr::read_csv("data/APINewsSources.csv")

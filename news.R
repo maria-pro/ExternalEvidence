@@ -1,9 +1,11 @@
 
-op,tions(stringsAsFactors = FALSE)
+options(stringsAsFactors = FALSE)
 
 
 library(rvest)
 library(tidyverse)
+library(skimr)
+library(stringr)
 
 devtools::install_github("correlaid/newsanchor")
 library(newsanchor)
@@ -11,47 +13,98 @@ library(newsanchor)
 devtools::install_github("r-lib/usethis")
 library(usethis)
 
+install.packages("stringr")
+
 newsApi_key = "148eb03f26c54c8a924c1917891582dc"
 
 
 #loading the file with company names
-companies<-read_csv("data/listOfCompanies.csv")
-searchTerms<-companies$searchTerm
+companies<-read_csv("data/listOfCompanies1.csv")
 
-testCompanies<-c("ANZ", "Google", "Amazon")
-
+searchTerms<-companies$FirstTerm
 
 dataFrame = list()
-#data<-tibble(x=testCompanies[1])
 
-names<-colnames(test)
-data<-tibble()
-colnames(data)<-colnames(test)
-
-
-data<-data %>% add_row(colnames(test)=test[2,])
-
-
-
-
-for (i in testCompanies){
-  #print(i)
+#collection for multiple companies
+for (i in searchTerms){
+  results_full <- get_everything_all(query =i, api_key = newsApi_key, language="en")
   
-  results_full <- get_everything_all(query = i, api_key = newsApi_key, language="en")
-  
-  #cont <- content(pages[[u]], as = "parsed", type = "application/json")
-  #explicit convertion to data frame
-  #dataFrame[[u]] <- data.frame(cont)
-  add_row(data, i)
-  
-  
+  test<-results_full$results_df%>%
+    unnest()%>%
+    mutate(companyName=i)
+  print(test)
+  dataFrame[[i]] <- data.frame(test)
 }
-#to record results in a dataset and save to disk
-test<-results_full$results_df%>%
-  unnest()%>%
-  mutate(companyName=i)
+
+newsAPI = data.table::rbindlist(dataFrame, fill=TRUE)
+
+newsAPI %>% write_csv("data/news.csv")
+
+#dataset collected using News API
+newsAPI<-read_csv("data/news.csv")
+
+#data collection using Google News 
+
+#function to collect data
+news <- function(term) {
+  
+  html_dat <- read_html(paste0("https://news.google.com/search?q=",term,"&hl=en-US&gl=US&ceid=US%3Aen"))
+  
+  dat <- data.frame(Link = html_dat %>%
+                      html_nodes('.VDXfz') %>% 
+                      html_attr('href')) %>% 
+    mutate(Link = gsub("./articles/","https://news.google.com/articles/",Link))
+  
+  news_dat <- data.frame(
+    Title = html_dat %>%
+      html_nodes('.DY5T1d') %>% 
+      html_text(),
+    Link = dat$Link,
+    Description =  html_dat %>%
+      html_nodes('.Rai5ob') %>% 
+      html_text()
+  )
+  
+  return(news_dat)
+}
 
 
+dataFrameGoogleNews = list()
+
+#collection for multiple companies
+
+for (i in searchTerms[101:213]){
+  results_GoogleNews <- news(i)
+  
+  test<-results_GoogleNews%>%
+    unnest()%>%
+    mutate(companyName=i)
+ 
+  dataFrameGoogleNews[[i]] <- data.frame(test)
+}
+
+newsGoogle4 = data.table::rbindlist(dataFrameGoogleNews, fill=TRUE)
+newsGoogle4 %>% write_csv("data/newsGoogle4.csv")
+
+
+newsGoogleFull<-bind_rows(newsGoogle, newsGoogle2, newsGoogle3, newsGoogle4)
+newsGoogleFull %>% write_csv("data/newsGoogleFull.csv")
+
+
+
+#
+
+
+
+#cleaning and descriptives
+
+newsGoogleFull %>%
+  count(companyName)
+
+
+
+
+#test
 results <- get_headlines(sources = "the-washington-post", api_key = newsApi_key)
 results_full <- get_everything_all(query = "Abacus Property", api_key = newsApi_key, language="en")
 
