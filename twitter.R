@@ -18,7 +18,7 @@ twitter_token <- create_token(
 #loading the file with company names
 companies<-read_csv("data/listOfCompanies.csv")
 
-searchTerms<-companies$searchTerm
+searchTerms<-companies$hashtagSearch
 
 dataFrameTwitter = list()
 
