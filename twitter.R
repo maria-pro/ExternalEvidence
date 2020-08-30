@@ -1,24 +1,41 @@
-#twitter access
+library(tidyverse)
+library(rtweet)
+# whatever name you assigned to your created app
+appname <- "MariaP"
 
-install.packages("rvest")
-library("rvest")
+## api key (example below is not a real key)
+key <- "W6G8J2SOcOpoLnidoCeM4XIIH"
 
+## api secret (example below is not a real key)
+secret <- "MHdYH2ui7cQlsXoDVk65H6gnWyqolDuyaukfJIm4Vh8Su9rnoS"
 
-scrape = read_html("https://twitter.com/whitehouse/")
+# create token named "twitter_token"
+twitter_token <- create_token(
+  app = appname,
+  consumer_key = key,
+  consumer_secret = secret)
 
-scrape %>%html_node("title")
+#loading the file with company names
+companies<-read_csv("data/listOfCompanies.csv")
 
-marketwatch_wbpg <- read_html(
-  "https://www.marketwatch.com/story/bitcoin-jumps-after-credit-scare-2018-10-15"
-)
+searchTerms<-companies$searchTerm
 
-marketwatch_wbpg %>%
-  html_node("title") %>% #See HTML source code for data within this tag
-  html_text()
+dataFrameTwitter = list()
 
-test<- marketwatch_wbpg %>%
-  html_nodes("p") %>% #See HTML source code for data within this tag
-  html_text()
+#collection for multiple companies
+for (i in searchTerms){
+  results_full <- search_tweets(q = i, n = 10000, lang = "en", retryonratelimit = TRUE)
+  test<-results_full%>%
+    mutate(companyName=i)
+  print(test$companyName)
+  dataFrameTwitter[[i]] <- data.frame(test)
+}
+
+TwitterAPI = data.table::rbindlist(dataFrameTwitter, fill=TRUE)
+#newsAPI<-data.frame("test")
+
+write_csv(newsAPI, paste("data/twitter", format(Sys.time(), "%d-%b-%Y"),".csv", sep=""))
+
 
 
 marketwatch_bitcoin_articles <- read_html(

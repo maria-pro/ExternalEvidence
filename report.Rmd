@@ -60,9 +60,6 @@ The diagram below presents the broad model for the project that integrates
 - company announcements (internal data)
 
 
-
-
-
 **Limitation**:
 
 - The developed model is based on a limited set of data from ASX companies which is a smaller stock exchange. 
@@ -124,7 +121,11 @@ The study is based on
 
 ### Variable and measurement
 
-### Methodology
+### Methods
+
+At the preliminary stage the study explored the news data collected via News API. This API allows collection of only 100 entries per request. To automate this, a cron job was set up to run on a weekly basis to collect data about each company from the sample. The resulting sample was checked for duplicates and reliability by two independent researchers.
+
+The exploratory stage started with 
 
 
 #### Data collection
