@@ -38,6 +38,7 @@ TwitterAPI<-flatten(TwitterAPI)
 
 write_csv(TwitterAPI, paste("data/twitter", format(Sys.time(), "%d-%b-%Y"),".csv", sep=""))
 
+write_csv(twitter_full, "twitter_full.csv")
 
 #twitter1<-read_csv("data/twitter130-Aug-2020.csv")
 
